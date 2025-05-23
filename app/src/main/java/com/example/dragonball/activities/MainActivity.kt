@@ -1,5 +1,6 @@
 package com.example.dragonball.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         characterList = emptyList()
         filteredList = emptyList()
 
-        adapter = CharacterAdapter(filteredList) { position ->
-            navigateToDetail(filteredList[position])
+        adapter = CharacterAdapter(characterList) { position ->
+            navigateToDetail(characterList[position])
         }
 
         binding.recyclerView.adapter = adapter
@@ -93,7 +94,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToDetail(character: Character) {
-        TODO("Not yet implemented")
+        Toast.makeText(this,character.name,Toast.LENGTH_LONG).show()
+        val intent: Intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_CHARACTER_ID, character.id)
+        startActivity(intent)
     }
 
     private fun getRetrofit(): Retrofit {

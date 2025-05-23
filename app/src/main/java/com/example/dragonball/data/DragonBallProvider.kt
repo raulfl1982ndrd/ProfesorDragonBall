@@ -3,7 +3,7 @@ package com.example.dragonball.data
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CharacterProvider {
+class DragonBallProvider {
 
     suspend fun getAllCharacters() : List<Character> {
         val apiService = getRetrofit().create(DragonBallApiService::class.java)
@@ -17,4 +17,8 @@ class CharacterProvider {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+    fun getCharacterApiService():DragonBallApiService{
+        return getRetrofit().create(DragonBallApiService::class.java)
+    }
+
 }
